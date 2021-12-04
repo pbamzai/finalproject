@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Group event #<%= @the_group_event.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/group_events">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_group_event/<%= @the_group_event.id %>">
+          Delete group event
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Group
+      </dt>
+      <dd>
+        <%= @the_group_event.group_id %>
+      </dd>
+
+      <dt>
+        Event
+      </dt>
+      <dd>
+        <%= @the_group_event.event_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_group_event.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_group_event.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit group event
+    </h2>
+
+    <form action="/modify_group_event/<%= @the_group_event.id %>"  method="post" >
+      <div>
+        <label for="group_id_box">
+          Group
+        </label>
+
+        <input type="text" id="group_id_box" name="query_group_id" value="<%= @the_group_event.group_id %>">
+      </div>
+
+      <div>
+        <label for="event_id_box">
+          Event
+        </label>
+
+        <input type="text" id="event_id_box" name="query_event_id" value="<%= @the_group_event.event_id %>">
+      </div>
+
+      <button>
+        Update group event
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

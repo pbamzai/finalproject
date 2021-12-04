@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all group events
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new group event
+    </h2>
+
+    <form action="/insert_group_event" method="post">
+      <div>
+        <label for="group_id_box">
+          Group
+        </label>
+
+        <input type="text" id="group_id_box" name="query_group_id">
+      </div>
+
+      <div>
+        <label for="event_id_box">
+          Event
+        </label>
+
+        <input type="text" id="event_id_box" name="query_event_id">
+      </div>
+
+      <button>
+        Create group event
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Group
+        </th>
+
+        <th>
+          Event
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_group_events.each do |a_group_event| %>
+      <tr>
+        <td>
+          <%= a_group_event.id %>
+        </td>
+
+        <td>
+          <%= a_group_event.group_id %>
+        </td>
+
+        <td>
+          <%= a_group_event.event_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_group_event.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_group_event.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/group_events/<%= a_group_event.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

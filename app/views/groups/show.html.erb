@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Group #<%= @the_group.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/groups">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_group/<%= @the_group.id %>">
+          Delete group
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Title
+      </dt>
+      <dd>
+        <%= @the_group.title %>
+      </dd>
+
+      <dt>
+        Group creator
+      </dt>
+      <dd>
+        <%= @the_group.group_creator_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_group.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_group.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit group
+    </h2>
+
+    <form action="/modify_group/<%= @the_group.id %>"  method="post" >
+      <div>
+        <label for="title_box">
+          Title
+        </label>
+
+        <input type="text" id="title_box" name="query_title" value="<%= @the_group.title %>">
+      </div>
+
+      <div>
+        <label for="group_creator_id_box">
+          Group creator
+        </label>
+
+        <input type="text" id="group_creator_id_box" name="query_group_creator_id" value="<%= @the_group.group_creator_id %>">
+      </div>
+
+      <button>
+        Update group
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

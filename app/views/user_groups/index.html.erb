@@ -1,0 +1,116 @@
+<div>
+  <div>
+    <h1>
+      List of all user groups
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new user group
+    </h2>
+
+    <form action="/insert_user_group" method="post">
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="group_id_box">
+          Group
+        </label>
+
+        <input type="text" id="group_id_box" name="query_group_id">
+      </div>
+
+      <div>
+        <input type="checkbox" id="approved_box" name="query_approved" value="1">
+
+        <label for="approved_box">Approved</label>
+      </div>
+
+      <button>
+        Create user group
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Group
+        </th>
+
+        <th>
+          Approved
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_user_groups.each do |a_user_group| %>
+      <tr>
+        <td>
+          <%= a_user_group.id %>
+        </td>
+
+        <td>
+          <%= a_user_group.user_id %>
+        </td>
+
+        <td>
+          <%= a_user_group.group_id %>
+        </td>
+
+        <td>
+          <%= a_user_group.approved %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_user_group.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_user_group.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/user_groups/<%= a_user_group.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

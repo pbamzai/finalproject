@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all groups
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new group
+    </h2>
+
+    <form action="/insert_group" method="post">
+      <div>
+        <label for="title_box">
+          Title
+        </label>
+
+        <input type="text" id="title_box" name="query_title">
+      </div>
+
+      <div>
+        <label for="group_creator_id_box">
+          Group creator
+        </label>
+
+        <input type="text" id="group_creator_id_box" name="query_group_creator_id">
+      </div>
+
+      <button>
+        Create group
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Title
+        </th>
+
+        <th>
+          Group creator
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_groups.each do |a_group| %>
+      <tr>
+        <td>
+          <%= a_group.id %>
+        </td>
+
+        <td>
+          <%= a_group.title %>
+        </td>
+
+        <td>
+          <%= a_group.group_creator_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_group.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_group.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/groups/<%= a_group.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

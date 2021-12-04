@@ -1,0 +1,146 @@
+<div>
+  <div>
+    <h1>
+      Event #<%= @the_event.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/events">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_event/<%= @the_event.id %>">
+          Delete event
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Date
+      </dt>
+      <dd>
+        <%= @the_event.date %>
+      </dd>
+
+      <dt>
+        Start time
+      </dt>
+      <dd>
+        <%= @the_event.start_time %>
+      </dd>
+
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%= @the_event.description %>
+      </dd>
+
+      <dt>
+        Name
+      </dt>
+      <dd>
+        <%= @the_event.name %>
+      </dd>
+
+      <dt>
+        Location
+      </dt>
+      <dd>
+        <%= @the_event.location %>
+      </dd>
+
+      <dt>
+        Host
+      </dt>
+      <dd>
+        <%= @the_event.host_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_event.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_event.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit event
+    </h2>
+
+    <form action="/modify_event/<%= @the_event.id %>"  method="post" >
+      <div>
+        <label for="date_box">
+          Date
+        </label>
+
+        <input type="date" id="date_box" name="query_date" value="<%= @the_event.date %>">
+      </div>
+
+      <div>
+        <label for="start_time_box">
+          Start time
+        </label>
+
+        <input type="time" id="start_time_box" name="query_start_time" value="<%= @the_event.start_time %>">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <input type="text" id="description_box" name="query_description" value="<%= @the_event.description %>">
+      </div>
+
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name" value="<%= @the_event.name %>">
+      </div>
+
+      <div>
+        <label for="location_box">
+          Location
+        </label>
+
+        <input type="text" id="location_box" name="query_location" value="<%= @the_event.location %>">
+      </div>
+
+      <div>
+        <label for="host_id_box">
+          Host
+        </label>
+
+        <input type="text" id="host_id_box" name="query_host_id" value="<%= @the_event.host_id %>">
+      </div>
+
+      <button>
+        Update event
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

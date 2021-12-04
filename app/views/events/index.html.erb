@@ -1,0 +1,166 @@
+<div>
+  <div>
+    <h1>
+      List of all events
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new event
+    </h2>
+
+    <form action="/insert_event" method="post">
+      <div>
+        <label for="date_box">
+          Date
+        </label>
+
+        <input type="date" id="date_box" name="query_date">
+      </div>
+
+      <div>
+        <label for="start_time_box">
+          Start time
+        </label>
+
+        <input type="time" id="start_time_box" name="query_start_time">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <input type="text" id="description_box" name="query_description">
+      </div>
+
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name">
+      </div>
+
+      <div>
+        <label for="location_box">
+          Location
+        </label>
+
+        <input type="text" id="location_box" name="query_location">
+      </div>
+
+      <div>
+        <label for="host_id_box">
+          Host
+        </label>
+
+        <input type="text" id="host_id_box" name="query_host_id">
+      </div>
+
+      <button>
+        Create event
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Date
+        </th>
+
+        <th>
+          Start time
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Name
+        </th>
+
+        <th>
+          Location
+        </th>
+
+        <th>
+          Host
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_events.each do |an_event| %>
+      <tr>
+        <td>
+          <%= an_event.id %>
+        </td>
+
+        <td>
+          <%= an_event.date %>
+        </td>
+
+        <td>
+          <%= an_event.start_time %>
+        </td>
+
+        <td>
+          <%= an_event.description %>
+        </td>
+
+        <td>
+          <%= an_event.name %>
+        </td>
+
+        <td>
+          <%= an_event.location %>
+        </td>
+
+        <td>
+          <%= an_event.host_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(an_event.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(an_event.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/events/<%= an_event.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      User group #<%= @the_user_group.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/user_groups">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_user_group/<%= @the_user_group.id %>">
+          Delete user group
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_user_group.user_id %>
+      </dd>
+
+      <dt>
+        Group
+      </dt>
+      <dd>
+        <%= @the_user_group.group_id %>
+      </dd>
+
+      <dt>
+        Approved
+      </dt>
+      <dd>
+        <%= @the_user_group.approved %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_user_group.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_user_group.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit user group
+    </h2>
+
+    <form action="/modify_user_group/<%= @the_user_group.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_user_group.user_id %>">
+      </div>
+
+      <div>
+        <label for="group_id_box">
+          Group
+        </label>
+
+        <input type="text" id="group_id_box" name="query_group_id" value="<%= @the_user_group.group_id %>">
+      </div>
+
+      <div>
+        <input type="checkbox" id="approved_box" name="query_approved" value="1" <%= "checked" if @the_user_group.approved %>>
+
+        <label for="approved_box">
+            Approved
+        </label>
+      </div>
+
+      <button>
+        Update user group
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
