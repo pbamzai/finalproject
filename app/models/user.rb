@@ -30,5 +30,7 @@ class User < ApplicationRecord
 
   validates(:first_name, { :presence => true })
 
+  has_many(:possible_events, { :through => :groups, :source => :events })
+
 
 end

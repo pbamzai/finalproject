@@ -1,3 +1,4 @@
+
 <div>
   <div>
     <h1>
@@ -53,15 +54,25 @@
         </label>
 
         <input type="text" id="location_box" name="query_location">
+
       </div>
 
-      <div>
-        <label for="host_id_box">
-          Host
+        <div>
+
+         <label for="group_name">
+          Select Group
         </label>
 
-        <input type="text" id="host_id_box" name="query_host_id">
+       <select name="group_id" >
+       <% @current_user.groups.each do |group| %>
+      
+      <option value="<%=group.id%>"><%=group.title%></option>
+      <%end%>
+       </select>
+
       </div>
+
+
 
       <button>
         Create event
@@ -75,9 +86,7 @@
   <div>
     <table>
       <tr>
-        <th>
-          ID
-        </th>
+      
 
         <th>
           Date
@@ -103,30 +112,27 @@
           Host
         </th>
 
+          <th>
+          Group
+        </th>
+
         <th>
           Created at
         </th>
 
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
+     
       </tr>
 
       <% @list_of_events.each do |an_event| %>
       <tr>
+     
+
         <td>
-          <%= an_event.id %>
+          <%= an_event.date.strftime("%b %d") %>
         </td>
 
         <td>
-          <%= an_event.date %>
-        </td>
-
-        <td>
-          <%= an_event.start_time %>
+          <%= an_event.start_time.strftime("%l:%m %p") %>
         </td>
 
         <td>
@@ -142,15 +148,17 @@
         </td>
 
         <td>
-          <%= an_event.host_id %>
+          <%= an_event.host.first_name %>
+        </td>
+
+         <td>
+          <%= an_event.groups.first.title %>
         </td>
 
         <td>
           <%= time_ago_in_words(an_event.created_at) %> ago
         </td>
-        <td>
-          <%= time_ago_in_words(an_event.updated_at) %> ago
-        </td>
+     
 
         <td>
           <a href="/events/<%= an_event.id %>">

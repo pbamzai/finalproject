@@ -49,9 +49,7 @@
   <div>
     <table>
       <tr>
-        <th>
-          ID
-        </th>
+      
 
         <th>
           User
@@ -79,16 +77,14 @@
 
       <% @list_of_user_groups.each do |a_user_group| %>
       <tr>
+       
+
         <td>
-          <%= a_user_group.id %>
+          <%= a_user_group.user.first_name %>
         </td>
 
         <td>
-          <%= a_user_group.user_id %>
-        </td>
-
-        <td>
-          <%= a_user_group.group_id %>
+          <%= a_user_group.group.title %>
         </td>
 
         <td>

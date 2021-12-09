@@ -1,0 +1,234 @@
+
+<% if @current_user %> 
+<h1>Welcome, <%= @current_user.first_name%>!</h1>
+<ul>
+  <li>
+    <a href="/user_sign_out">Sign Out</a>
+  </li>
+  
+  <li><a href="/events">Plan an event</a></li>
+
+  <li><a href="/groups">Current Groups</a></li>
+<table>
+      <tr>
+        <th>
+         Group
+        </th>
+
+        <th>
+          Details
+        </th>
+
+
+        
+      </tr>
+
+      <% @current_user.user_groups.each do |a_group_event| %>
+      <tr>
+  
+        <td>
+          <%= a_group_event.group.title %>
+        </td>
+
+        <td>
+          <a href="/user_groups/<%= a_group_event.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+
+  
+</ul>
+
+<%@current_user.events.inspect%>
+
+<% else %>
+<h1>Sign In</h1>
+
+<form action="/verify_credentials" method="post">
+  <label for="browser_username">Username</label>
+  <input id="browser_username" type="text" name="query_username" placeholder="Enter your username...">
+
+  <label for="browser_password">Password</label>
+  <input id="browser_password" type="password" name="query_password" placeholder="Enter your password...">
+
+  <button>Sign in!</button>
+</form>
+
+<p>
+  Or, <a href="/user_sign_up">sign up</a>
+</p>
+
+<%end%>
+
+<h3>Attending Events</h3>
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          Date
+        </th>
+
+        <th>
+          Time
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Host
+        </th>
+        
+        <th>
+        Address
+      </th>
+
+  
+      </tr>
+
+<% @event.each do |party| %>
+<%if @current_user.attendees.where(:event_id => party.id).exists?  %>
+      <tr>
+        <td>
+          <%= party.date.strftime("%b %d") %>
+        </td>
+
+        <td>
+          <%= party.start_time.strftime("%l:%m %p") %>
+        </td>
+
+        <td>
+          <%= party.description %>
+        </td>
+
+        <td>
+        <%= party.host.first_name %>
+      </td>
+
+      <td>
+      <%= party.location %>
+    </td>
+
+    
+        <td>
+          <a href="/events/<%= party.id %>">
+            Show details
+          </a>
+        </td>
+
+    <% attendence = @current_user.attendees.where(:event_id => party.id).at(0)  %>
+    <td>
+    <a href = "/delete_attendee/<%=attendence.id%>">Leave Event
+    </a>
+    </td>
+</tr>
+<%end%>
+<%end%>
+
+
+</table>
+
+<h3>Group Events</h3>
+<hr>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>
+          Date
+        </th>
+
+        <th>
+          Time
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Host
+        </th>
+        
+        <th>
+        Address
+      </th>
+
+       <th>
+        Group
+        </th>
+
+        <th>
+        # Attending
+        </th>
+
+    <th>
+      Attending?
+    </th>
+    
+      </tr>
+
+<% @group_events.each do |party| %>
+<%if @current_user.attendees.where(:event_id => party.id).at(0) == nil  %>
+      <tr>
+        <td>
+          <%= party.date.strftime("%b %d") %>
+        </td>
+
+        <td>
+          <%= party.start_time.strftime("%l:%m %p") %>
+        </td>
+
+        <td>
+          <%= party.description %>
+        </td>
+
+        <td>
+        <%= party.host.first_name %>
+      </td>
+
+      <td>
+      <%= party.location %>
+    </td>
+
+    <td>
+    <%= party.groups.first.title %>
+    </td>
+
+  <td>
+    <%= party.attendees.count %>
+    </td>
+    
+
+    <td>
+     <form action="/insert_attendee" method="post">
+      <div>
+        <input type="hidden" id="event_id_box" name="query_event_id" value="<%=party.id%>">
+      </div>
+
+      <div>
+    
+
+        <input type="hidden" id="user_id_box" name="query_user_id" value ="<%=@current_user.id%>">
+      </div>
+
+    
+
+      <button>
+        Attend Party
+      </button>
+    </form>
+    
+    </td>
+</tr>
+
+<%end%>
+<%end%>
+</table>
+

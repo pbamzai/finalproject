@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+  get("/", { :controller => "home", :action => "index"})
 
   # Routes for the Group event resource:
 

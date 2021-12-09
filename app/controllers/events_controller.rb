@@ -24,13 +24,21 @@ class EventsController < ApplicationController
     the_event.description = params.fetch("query_description")
     the_event.name = params.fetch("query_name")
     the_event.location = params.fetch("query_location")
-    the_event.host_id = params.fetch("query_host_id")
+    the_event.host_id = @current_user.id
+    
+  
+
 
     if the_event.valid?
       the_event.save
+      group_event = GroupEvent.new
+      group_event.event_id = the_event.id
+      group_event.group_id = params.fetch("group_id")
+      group_event.save
+      p group_event.inspect
       redirect_to("/events", { :notice => "Event created successfully." })
     else
-      redirect_to("/events", { :notice => "Event failed to create successfully." })
+      redirect_to("/events", { :notice => the_event.errors.full_messages.to_sentence })
     end
   end
 

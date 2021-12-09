@@ -1,15 +1,11 @@
 <div>
   <div>
     <h1>
-      User group #<%= @the_user_group.id %> details
+      User Group <%= @the_user_group.group.title %> details
     </h1>
 
     <div>
-      <div>
-        <a href="/user_groups">
-          Go back
-        </a>
-      </div>
+  
 
       <div>
         <a href="/delete_user_group/<%= @the_user_group.id %>">
@@ -23,14 +19,14 @@
         User
       </dt>
       <dd>
-        <%= @the_user_group.user_id %>
+        <%= @the_user_group.user.first_name %>
       </dd>
 
       <dt>
         Group
       </dt>
       <dd>
-        <%= @the_user_group.group_id %>
+        <%= @the_user_group.group.title %>
       </dd>
 
       <dt>
@@ -47,55 +43,20 @@
         <%= time_ago_in_words(@the_user_group.created_at) %> ago
       </dd>
 
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_user_group.updated_at) %> ago
-      </dd>
+     
     </dl>
   </div>
 </div>
 
 <hr>
 
+Members in Group
 
-<div>
-  <div>
-    <h2>
-      Edit user group
-    </h2>
+<%# @the_user_group.each do |members| %>
 
-    <form action="/modify_user_group/<%= @the_user_group.id %>"  method="post" >
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
+<td>
+<%#=# members.?? %>
+</td>
 
-        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_user_group.user_id %>">
-      </div>
+<%#=# @the_user_group.attendees.where(:event_id => ??).all %>
 
-      <div>
-        <label for="group_id_box">
-          Group
-        </label>
-
-        <input type="text" id="group_id_box" name="query_group_id" value="<%= @the_user_group.group_id %>">
-      </div>
-
-      <div>
-        <input type="checkbox" id="approved_box" name="query_approved" value="1" <%= "checked" if @the_user_group.approved %>>
-
-        <label for="approved_box">
-            Approved
-        </label>
-      </div>
-
-      <button>
-        Update user group
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>

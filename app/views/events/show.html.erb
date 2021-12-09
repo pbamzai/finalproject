@@ -1,7 +1,8 @@
+
 <div>
   <div>
     <h1>
-      Event #<%= @the_event.id %> details
+      Event <%= @the_event.name %> details
     </h1>
 
     <div>
@@ -23,14 +24,14 @@
         Date
       </dt>
       <dd>
-        <%= @the_event.date %>
+        <%= @the_event.date.strftime("%b %d") %>
       </dd>
 
       <dt>
         Start time
       </dt>
       <dd>
-        <%= @the_event.start_time %>
+        <%= @the_event.start_time.strftime("%l:%m %p") %>
       </dd>
 
       <dt>
@@ -58,21 +59,21 @@
         Host
       </dt>
       <dd>
-        <%= @the_event.host_id %>
+        <%= @the_event.host.first_name %>
+      </dd>
+
+      <dt>
+        Group
+      </dt>
+      <dd>
+        <%= @the_event.groups.first.title %>
       </dd>
 
       <dt>
         Created at
       </dt>
       <dd>
-        <%= time_ago_in_words(@the_event.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_event.updated_at) %> ago
+       <%= time_ago_in_words(@the_event.created_at) %> ago
       </dd>
     </dl>
   </div>
@@ -129,11 +130,9 @@
       </div>
 
       <div>
-        <label for="host_id_box">
-          Host
-        </label>
+       
 
-        <input type="text" id="host_id_box" name="query_host_id" value="<%= @the_event.host_id %>">
+        <input type="hidden" id="host_id_box" name="query_host_id" value="<%= @the_event.host_id %>">
       </div>
 
       <button>
@@ -144,3 +143,18 @@
 </div>
 
 <hr>
+
+
+<h2>Attendees</h2>
+
+  <% @the_event.attendees.each do |event_attendees| %>
+      <tr>
+  
+        <td>
+          <%= event_attendees.user.first_name %>
+        </td>
+<%end%>
+
+<%#= @the_event.inspect %>
+
+<%#= @the_user_group.attendees.where(:event_id => ??).all %>

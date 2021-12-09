@@ -25,7 +25,7 @@ class AttendeesController < ApplicationController
 
     if the_attendee.valid?
       the_attendee.save
-      redirect_to("/attendees", { :notice => "Attendee created successfully." })
+      redirect_to("/", { :notice => "Attendee created successfully." })
     else
       redirect_to("/attendees", { :notice => "Attendee failed to create successfully." })
     end
@@ -53,6 +53,6 @@ class AttendeesController < ApplicationController
 
     the_attendee.destroy
 
-    redirect_to("/attendees", { :notice => "Attendee deleted successfully."} )
+    redirect_to("/", { :notice => "Attendee deleted successfully."} )
   end
 end

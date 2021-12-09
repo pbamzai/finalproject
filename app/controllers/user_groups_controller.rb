@@ -21,13 +21,13 @@ class UserGroupsController < ApplicationController
     the_user_group = UserGroup.new
     the_user_group.user_id = params.fetch("query_user_id")
     the_user_group.group_id = params.fetch("query_group_id")
-    the_user_group.approved = params.fetch("query_approved", false)
+    the_user_group.approved = params.fetch("query_approved", true)
 
     if the_user_group.valid?
       the_user_group.save
       redirect_to("/user_groups", { :notice => "User group created successfully." })
     else
-      redirect_to("/user_groups", { :notice => "User group failed to create successfully." })
+      redirect_to("/user_groups", { :notice => the_user_group.error.full_messages })
     end
   end
 
